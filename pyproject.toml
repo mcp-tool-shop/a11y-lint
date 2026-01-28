@@ -10,9 +10,19 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    { name = "AI Development Lab" }
+    { name = "mcp-tool-shop", email = "64996768+mcp-tool-shop@users.noreply.github.com" }
 ]
-keywords = ["accessibility", "a11y", "cli", "linter", "validation"]
+keywords = [
+    "accessibility",
+    "a11y",
+    "cli",
+    "linter",
+    "validation",
+    "wcag",
+    "low-vision",
+    "error-messages",
+    "testing",
+]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Console",
@@ -42,7 +52,9 @@ dev = [
 a11y-lint = "a11y_lint.cli:main"
 
 [project.urls]
-Repository = "https://github.com/ai-dev-lab/a11y-lint"
+Homepage = "https://github.com/mcp-tool-shop/a11y-lint"
+Repository = "https://github.com/mcp-tool-shop/a11y-lint"
+Issues = "https://github.com/mcp-tool-shop/a11y-lint/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

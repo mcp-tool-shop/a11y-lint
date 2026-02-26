@@ -1,19 +1,20 @@
 <p align="center">
-  <img src="logo.png" alt="a11y-lint logo" width="140" />
+  <a href="README.ja.md">日本語</a> | <a href="README.zh.md">中文</a> | <a href="README.es.md">Español</a> | <a href="README.fr.md">Français</a> | <a href="README.hi.md">हिन्दी</a> | <a href="README.it.md">Italiano</a> | <a href="README.pt-BR.md">Português (BR)</a>
 </p>
-<h1 align="center">a11y-lint</h1>
+
 <p align="center">
-  <strong>Low-vision-first accessibility linting for CLI output.</strong><br/>
-  Part of <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>
+  <img src="https://raw.githubusercontent.com/mcp-tool-shop-org/brand/main/logos/a11y-lint/readme.png" width="400" />
 </p>
+
 <p align="center">
   <a href="https://pypi.org/project/a11y-lint/"><img src="https://img.shields.io/pypi/v/a11y-lint?color=blue" alt="PyPI version" /></a>
   <a href="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml"><img src="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue" alt="Python versions" />
-  <img src="https://img.shields.io/badge/a11y-low--vision--first-blue" alt="a11y" />
-  <img src="https://img.shields.io/badge/output-contract--stable-green" alt="contract" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-black" alt="license" /></a>
+  <a href="https://mcp-tool-shop-org.github.io/a11y-lint/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page" /></a>
 </p>
+
+Low-vision-first accessibility linting for CLI output.
 ---
 Validates that error messages follow accessible patterns with the **[OK]/[WARN]/[ERROR] + What/Why/Fix** structure.
 ## Why

@@ -72,3 +72,6 @@ Thumbs.db
 # Project specific
 *.log
 *.zip
+site/.astro/
+site/node_modules/
+.polyglot-cache.json

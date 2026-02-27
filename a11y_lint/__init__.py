@@ -4,7 +4,7 @@ Validates that CLI error messages follow accessible patterns
 with [OK]/[WARN]/[ERROR] + What/Why/Fix structure.
 """
 
-__version__ = "0.3.0"
+__version__ = "1.0.0"
 
 from .errors import A11yMessage, ErrorCodes, Level, Location
 from .render import Renderer, render, render_colored, render_plain, should_use_color

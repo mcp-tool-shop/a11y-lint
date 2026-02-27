@@ -9,6 +9,7 @@
 <p align="center">
   <a href="https://pypi.org/project/a11y-lint/"><img src="https://img.shields.io/pypi/v/a11y-lint?color=blue" alt="PyPI version" /></a>
   <a href="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml"><img src="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://codecov.io/gh/mcp-tool-shop-org/a11y-lint"><img src="https://codecov.io/gh/mcp-tool-shop-org/a11y-lint/branch/main/graph/badge.svg" alt="Coverage" /></a>
   <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue" alt="Python versions" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-black" alt="license" /></a>
   <a href="https://mcp-tool-shop-org.github.io/a11y-lint/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page" /></a>
@@ -276,6 +277,10 @@ markdown = render_report_md(messages, title="My Report")
 3. **Track baselines**: Use JSON output to detect regressions
 4. **Treat badges as informational**: They don't imply conformance
 
+## Security & Data Scope
+
+**Data touched:** text and JSON files passed as CLI arguments (read-only), stdin input, generated reports written to stdout or `-o` path. **Data NOT touched:** no files outside specified arguments, no browser data, no OS credentials. **No network egress** — all linting is local. **No telemetry** is collected or sent.
+
 ## Companion Tools
 
 | Tool | Description |
@@ -305,3 +310,7 @@ ruff format .
 ## License
 
 MIT
+
+---
+
+Built by <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>

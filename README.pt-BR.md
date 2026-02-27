@@ -9,6 +9,7 @@
 <p align="center">
   <a href="https://pypi.org/project/a11y-lint/"><img src="https://img.shields.io/pypi/v/a11y-lint?color=blue" alt="PyPI version" /></a>
   <a href="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml"><img src="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://codecov.io/gh/mcp-tool-shop-org/a11y-lint"><img src="https://codecov.io/gh/mcp-tool-shop-org/a11y-lint/branch/main/graph/badge.svg" alt="Coverage" /></a>
   <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue" alt="Python versions" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-black" alt="license" /></a>
   <a href="https://mcp-tool-shop-org.github.io/a11y-lint/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page" /></a>
@@ -16,14 +17,14 @@
 
 Verificação de acessibilidade para saídas de linha de comando, priorizando usuários com baixa visão.
 ---
-Valida se as mensagens de erro seguem padrões acessíveis, com a estrutura **[OK]/[AVISO]/[ERRO] + O que/Por que/Correção**.
+Valida se as mensagens de erro seguem padrões acessíveis, com a estrutura **[OK]/[AVISO]/[ERRO] + O que/Por que/Como corrigir**.
 ## Por que?
-A maioria das ferramentas de linha de comando trata a saída de erros como uma funcionalidade secundária. Mensagens como erros "ENOENT" ou mensagens fatais obscuras presumem que o usuário consegue interpretar visualmente a saída densa do terminal e já sabe o que deu errado. Para usuários com baixa visão, deficiências cognitivas ou qualquer pessoa que trabalhe sob estresse, essas mensagens são uma barreira.
+A maioria das ferramentas de linha de comando trata a saída de erros como uma funcionalidade secundária. Mensagens como erros "ENOENT" ou mensagens fatais obscuras presumem que o usuário consegue interpretar visualmente a saída densa do terminal e já sabe o que deu errado. Para usuários com baixa visão, deficiências cognitivas ou qualquer pessoa trabalhando sob estresse, essas mensagens são uma barreira.
 O **a11y-lint** detecta esses padrões antes que sejam implementados:
 - Linhas muito longas para telas ampliadas
 - Texto em MAIÚSCULAS que dificulta a leitura
 - Jargões sem explicação
-- Uso de cor como único indicador
+- Uso de cores como único indicador
 - Falta de contexto sobre "por que" e "como corrigir"
 ## Filosofia
 
@@ -41,7 +42,7 @@ Atualmente, apenas `no-color-only` (WCAG SC 1.4.1) é uma regra mapeada para o W
 **Importante:** As notas (de A a F) são *resumos derivados* para relatórios executivos. Elas **nunca** devem ser o principal mecanismo para a integração contínua (CI).
 
 Para pipelines de CI, utilize como gatilho:
-- Falhas específicas de regras (especialmente regras mapeadas para o WCAG, como `no-color-only`)
+- Falhas específicas em regras (especialmente regras mapeadas para o WCAG, como `no-color-only`)
 - Limites de contagem de erros
 - Regressões em relação a uma linha de base
 
@@ -57,7 +58,7 @@ a11y-lint scan --enable=no-color-only output.txt
 
 ### Selos e Conformidade
 
-As pontuações e os selos são **apenas informativos**. Eles NÃO implicam conformidade com o WCAG ou certificação de acessibilidade. Esta ferramenta verifica regras de política além dos requisitos mínimos do WCAG.
+As pontuações e os selos são **apenas informativos**. Eles **NÃO** implicam conformidade com o WCAG ou certificação de acessibilidade. Esta ferramenta verifica regras de política além dos requisitos mínimos do WCAG.
 
 ## Instalação
 
@@ -135,7 +136,7 @@ a11y-lint report output.txt -o report.md
 a11y-lint report --title="My Report" output.txt
 ```
 
-### `list-rules` - Mostra as regras disponíveis
+### `list-rules` - Exibe as regras disponíveis
 
 ```bash
 a11y-lint list-rules          # Simple list
@@ -151,7 +152,7 @@ a11y-lint schema
 ## Variáveis de Ambiente
 
 | Variável | Descrição |
-| ---------- | ------------- |
+|----------|-------------|
 | `NO_COLOR` | Desativa a saída colorida (qualquer valor) |
 | `FORCE_COLOR` | Força a saída colorida (qualquer valor, substitui `NO_COLOR=false`) |
 
@@ -162,24 +163,24 @@ Consulte [no-color.org](https://no-color.org/) para obter o padrão.
 ### Regras WCAG
 
 | Regra | Código | WCAG | Descrição |
-| ------ | ------ | ------ | ------------- |
-| `no-color-only` | CLR001 | 1.4.1 | Não transmita informações apenas por meio da cor |
+|------|------|------|-------------|
+| `no-color-only` | CLR001 | 1.4.1 | Não transmita informações apenas por meio de cores |
 
 ### Regras de Política
 
 | Regra | Código | Descrição |
-| ------ | ------ | ------------- |
+|------|------|-------------|
 | `line-length` | FMT001 | As linhas devem ter no máximo 120 caracteres |
-| `no-all-caps` | LNG002 | Evite texto em letras maiúsculas (difícil de ler) |
-| `plain-language` | LNG001 | Evite jargões técnicos (EOF, STDIN, etc.). |
-| `emoji-moderation` | SCR001 | Limite o uso de emojis (confunde os leitores de tela). |
-| `punctuation` | LNG003 | As mensagens de erro devem terminar com pontuação. |
-| `error-structure` | A11Y003 | As mensagens de erro devem explicar o motivo e como corrigir. |
+| `no-all-caps` | LNG002 | Evite texto em maiúsculas (difícil de ler) |
+| `plain-language` | LNG001 | Evite jargões técnicos (EOF, STDIN, etc.) |
+| `emoji-moderation` | SCR001 | Limite o uso de emojis (confunde leitores de tela) |
+| `punctuation` | LNG003 | As mensagens de erro devem terminar com pontuação |
+| `error-structure` | A11Y003 | As mensagens de erro devem explicar o motivo e como corrigir |
 | `no-ambiguous-pronouns` | LNG004 | Evite começar com "ele", "isto", etc. |
 
-## Formato da Mensagem de Erro
+## Formato das Mensagens de Erro
 
-Todas as mensagens de erro seguem a estrutura O que/Por que/Como corrigir:
+Todas as mensagens de erro seguem a estrutura "O que/Por que/Correção":
 
 ```
 [ERROR] CODE: What happened
@@ -195,7 +196,7 @@ Todas as mensagens de erro seguem a estrutura O que/Por que/Como corrigir:
 
 ## Esquema JSON
 
-As mensagens estão em conformidade com o esquema de erro da CLI (`schemas/cli.error.schema.v0.1.json`):
+As mensagens estão em conformidade com o esquema de erros da interface de linha de comando (`schemas/cli.error.schema.v0.1.json`):
 
 ```json
 {
@@ -253,7 +254,7 @@ markdown = render_report_md(messages, title="My Report")
 
 ## Integração com CI
 
-### Exemplo do GitHub Actions
+### Exemplo de Ação do GitHub
 
 ```yaml
 - name: Check CLI accessibility
@@ -272,16 +273,20 @@ markdown = render_report_md(messages, title="My Report")
 ### Melhores Práticas
 
 1. **Priorize erros, não notas**: Use códigos de saída, não notas.
-2. **Ative regras específicas**: Para conformidade com o WCAG, ative `no-color-only`.
+2. **Habilite regras específicas**: Para conformidade com o WCAG, habilite a regra `no-color-only`.
 3. **Monitore as linhas de base**: Use a saída JSON para detectar regressões.
 4. **Considere os selos como informativos**: Eles não implicam conformidade.
+
+## Segurança e Escopo de Dados
+
+**Dados acessados:** arquivos de texto e JSON passados como argumentos da interface de linha de comando (somente leitura), entrada da entrada padrão (stdin), relatórios gerados escritos na saída padrão (stdout) ou no caminho especificado com a opção `-o`. **Dados NÃO acessados:** nenhum arquivo fora dos argumentos especificados, nenhum dado do navegador, nenhuma credencial do sistema operacional. **Não há saída de rede** — toda a análise é local. **Nenhuma telemetria** é coletada ou enviada.
 
 ## Ferramentas Complementares
 
 | Ferramenta | Descrição |
-| ------ | ------------- |
-| [a11y-ci](https://pypi.org/project/a11y-ci/) | Verificação de acessibilidade para relatórios de pontuação a11y-lint, com detecção de regressões na linha de base. |
-| [a11y-assist](https://pypi.org/project/a11y-assist/) | Assistência determinística para acessibilidade em caso de falhas na CLI. |
+|------|-------------|
+| [a11y-ci](https://pypi.org/project/a11y-ci/) | Gate de CI para avaliações de acessibilidade com detecção de regressões na linha de base. |
+| [a11y-assist](https://pypi.org/project/a11y-assist/) | Assistência determinística para acessibilidade em caso de falhas na interface de linha de comando. |
 
 ## Desenvolvimento
 
@@ -305,3 +310,7 @@ ruff format .
 ## Licença
 
 MIT
+
+---
+
+Criado por <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>

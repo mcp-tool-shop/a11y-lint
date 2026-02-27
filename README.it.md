@@ -9,6 +9,7 @@
 <p align="center">
   <a href="https://pypi.org/project/a11y-lint/"><img src="https://img.shields.io/pypi/v/a11y-lint?color=blue" alt="PyPI version" /></a>
   <a href="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml"><img src="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://codecov.io/gh/mcp-tool-shop-org/a11y-lint"><img src="https://codecov.io/gh/mcp-tool-shop-org/a11y-lint/branch/main/graph/badge.svg" alt="Coverage" /></a>
   <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue" alt="Python versions" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-black" alt="license" /></a>
   <a href="https://mcp-tool-shop-org.github.io/a11y-lint/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page" /></a>
@@ -19,11 +20,11 @@ Controllo di accessibilità per output della riga di comando, con priorità per 
 Verifica che i messaggi di errore seguano schemi accessibili con la struttura **[OK]/[AVVERTIMENTO]/[ERRORE] + Cosa/Perché/Soluzione**.
 ## Perché
 Molti strumenti a riga di comando trattano l'output degli errori come un'aggiunta successiva. Messaggi come errori "file non trovato" o messaggi di errore fatali presuppongono che l'utente possa interpretare visivamente l'output del terminale e che già sappia cosa è andato storto. Per gli utenti con problemi di vista, disabilità cognitive o per chiunque lavori sotto stress, questi messaggi rappresentano un ostacolo.
-**a11y-lint** rileva questi schemi prima che vengano implementati:
+**a11y-lint** rileva questi schemi prima che vengano distribuiti:
 - Righe troppo lunghe per display ingranditi
-- Testo in MAIUSCOLO che rende la lettura difficile
-- Termini tecnici senza spiegazioni
-- Utilizzo del colore come unico indicatore
+- Testo in MAIUSCOLO che ostacola la leggibilità
+- Termini tecnici senza spiegazione
+- Uso del colore come unico indicatore
 - Mancanza del contesto "perché" e "soluzione"
 ## Filosofia
 
@@ -31,18 +32,18 @@ Molti strumenti a riga di comando trattano l'output degli errori come un'aggiunt
 
 Questo strumento distingue tra due tipi di regole:
 
-- **Regole WCAG**: Corrispondono a specifici criteri di successo WCAG. Le violazioni possono costituire barriere all'accessibilità.
+- **Regole WCAG**: Corrispondenti a specifici criteri di successo WCAG. Le violazioni possono costituire barriere all'accessibilità.
 - **Regole di politica**: Buone pratiche per l'accessibilità cognitiva. Non sono requisiti WCAG, ma migliorano l'usabilità per gli utenti con disabilità cognitive.
 
 Attualmente, solo `no-color-only` (WCAG SC 1.4.1) è una regola mappata a WCAG. Tutte le altre regole sono regole di politica che migliorano la chiarezza e la leggibilità dei messaggi.
 
-### Voti rispetto all'integrazione nel sistema di Continuous Integration (CI)
+### Valutazioni rispetto all'integrazione continua (CI)
 
-**Importante:** I voti (da A a F) sono *riepiloghi derivati* per la reportistica dirigenziale. Non devono mai essere il meccanismo principale per l'integrazione nel sistema di CI.
+**Importante:** Le valutazioni (da A a F) sono *riepiloghi derivati* per la reportistica dirigenziale. Non devono **mai** essere il meccanismo principale per l'integrazione continua (CI).
 
-Per le pipeline di CI, si deve bloccare l'esecuzione in caso di:
-- Fallimento di regole specifiche (soprattutto regole mappate a WCAG come `no-color-only`)
-- Superamento delle soglie di numero di errori
+Per le pipeline di CI, verificare:
+- Fallimenti di regole specifiche (soprattutto regole mappate a WCAG come `no-color-only`)
+- Soglie del numero di errori
 - Regressioni rispetto a una baseline
 
 ```bash
@@ -151,7 +152,7 @@ a11y-lint schema
 ## Variabili d'ambiente
 
 | Variabile | Descrizione |
-| ---------- | ------------- |
+|----------|-------------|
 | `NO_COLOR` | Disabilita l'output colorato (qualsiasi valore) |
 | `FORCE_COLOR` | Forza l'output colorato (qualsiasi valore, sovrascrive NO_COLOR=false) |
 
@@ -162,24 +163,24 @@ Consultare [no-color.org](https://no-color.org/) per lo standard.
 ### Regole WCAG
 
 | Regola | Codice | WCAG | Descrizione |
-| ------ | ------ | ------ | ------------- |
+|------|------|------|-------------|
 | `no-color-only` | CLR001 | 1.4.1 | Non trasmettere informazioni solo attraverso il colore |
 
 ### Regole di politica
 
 | Regola | Codice | Descrizione |
-| ------ | ------ | ------------- |
-| `line-length` | FMT001 | Le righe devono contenere al massimo 120 caratteri |
+|------|------|-------------|
+| `line-length` | FMT001 | Le righe dovrebbero contenere al massimo 120 caratteri |
 | `no-all-caps` | LNG002 | Evitare il testo in MAIUSCOLO (difficile da leggere) |
-| `plain-language` | LNG001 | Evitare termini tecnici (EOF, STDIN, ecc.). |
-| `emoji-moderation` | SCR001 | Limitare l'uso di emoji (possono confondere i lettori di schermo). |
-| `punctuation` | LNG003 | I messaggi di errore devono terminare con la punteggiatura. |
-| `error-structure` | A11Y003 | Gli errori devono spiegare perché si sono verificati e come risolverli. |
+| `plain-language` | LNG001 | Evitare il gergo tecnico (EOF, STDIN, ecc.) |
+| `emoji-moderation` | SCR001 | Limitare l'uso di emoji (confondono i lettori di schermo) |
+| `punctuation` | LNG003 | I messaggi di errore devono terminare con la punteggiatura |
+| `error-structure` | A11Y003 | Gli errori devono spiegare il perché e come risolverli |
 | `no-ambiguous-pronouns` | LNG004 | Evitare di iniziare con "it", "this", ecc. |
 
 ## Formato dei messaggi di errore
 
-Tutti i messaggi di errore seguono la struttura Cosa/Perché/Soluzione:
+Tutti i messaggi di errore seguono la struttura "Cosa/Perché/Soluzione":
 
 ```
 [ERROR] CODE: What happened
@@ -251,7 +252,7 @@ from a11y_lint import render_report_md
 markdown = render_report_md(messages, title="My Report")
 ```
 
-## Integrazione CI
+## Integrazione con CI
 
 ### Esempio di GitHub Actions
 
@@ -271,17 +272,21 @@ markdown = render_report_md(messages, title="My Report")
 
 ### Buone pratiche
 
-1. **Concentrarsi sugli errori, non sui voti**: Utilizzare i codici di uscita, non i voti.
+1. **Concentrarsi sugli errori, non sui voti**: Utilizzare i codici di uscita, non i voti numerici.
 2. **Abilitare regole specifiche**: Per la conformità WCAG, abilitare `no-color-only`.
-3. **Tracciare le baseline**: Utilizzare l'output JSON per rilevare regressioni.
+3. **Monitorare le baseline**: Utilizzare l'output JSON per rilevare regressioni.
 4. **Considerare le badge come informative**: Non implicano la conformità.
+
+## Sicurezza e ambito dei dati
+
+**Dati elaborati:** file di testo e JSON passati come argomenti della CLI (solo lettura), input da stdin, report generati scritti su stdout o nel percorso specificato con `-o`. **Dati NON elaborati:** nessun file al di fuori degli argomenti specificati, nessun dato del browser, nessuna credenziale del sistema operativo. **Nessuna connessione di rete in uscita**: tutte le operazioni di linting sono locali. **Nessun dato di telemetria** viene raccolto o trasmesso.
 
 ## Strumenti complementari
 
 | Strumento | Descrizione |
-| ------ | ------------- |
+|------|-------------|
 | [a11y-ci](https://pypi.org/project/a11y-ci/) | Controllo CI per i risultati di accessibilità con rilevamento di regressioni rispetto alla baseline. |
-| [a11y-assist](https://pypi.org/project/a11y-assist/) | Assistenza deterministica per l'accessibilità in caso di errori della CLI. |
+| [a11y-assist](https://pypi.org/project/a11y-assist/) | Assistenza deterministica per gli errori della CLI relativi all'accessibilità. |
 
 ## Sviluppo
 
@@ -305,3 +310,7 @@ ruff format .
 ## Licenza
 
 MIT
+
+---
+
+Creato da <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>

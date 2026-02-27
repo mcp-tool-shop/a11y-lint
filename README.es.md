@@ -9,6 +9,7 @@
 <p align="center">
   <a href="https://pypi.org/project/a11y-lint/"><img src="https://img.shields.io/pypi/v/a11y-lint?color=blue" alt="PyPI version" /></a>
   <a href="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml"><img src="https://github.com/mcp-tool-shop-org/a11y-lint/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://codecov.io/gh/mcp-tool-shop-org/a11y-lint"><img src="https://codecov.io/gh/mcp-tool-shop-org/a11y-lint/branch/main/graph/badge.svg" alt="Coverage" /></a>
   <img src="https://img.shields.io/badge/python-3.11%20%7C%203.12-blue" alt="Python versions" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-black" alt="license" /></a>
   <a href="https://mcp-tool-shop-org.github.io/a11y-lint/"><img src="https://img.shields.io/badge/Landing_Page-live-blue" alt="Landing Page" /></a>
@@ -18,12 +19,12 @@ Accesibilidad para usuarios con baja visión: análisis de la salida de la líne
 ---
 Valida que los mensajes de error sigan patrones accesibles con la estructura **[OK]/[ADVERTENCIA]/[ERROR] + ¿Qué/Por qué/Solución**.
 ## ¿Por qué?
-La mayoría de las herramientas de línea de comandos tratan la salida de errores como una función secundaria. Los mensajes como los errores "ENOENT" o los mensajes fatales crípticos asumen que el usuario puede interpretar visualmente la salida densa de la terminal y ya sabe qué ha salido mal. Para los usuarios con baja visión, discapacidades cognitivas o cualquier persona que trabaje bajo estrés, estos mensajes son una barrera.
+La mayoría de las herramientas de línea de comandos tratan la salida de errores como una ocurrencia secundaria. Los mensajes como los errores "ENOENT" o los mensajes fatales crípticos asumen que el usuario puede interpretar visualmente la salida densa de la terminal y ya sabe qué ha salido mal. Para los usuarios con baja visión, discapacidades cognitivas o cualquier persona que trabaje bajo estrés, estos mensajes son una barrera.
 **a11y-lint** detecta estos patrones antes de que se publiquen:
 - Líneas demasiado largas para pantallas ampliadas.
 - Texto en MAYÚSCULAS que dificulta la legibilidad.
 - Jerga sin explicación.
-- Uso del color como único indicador.
+- Uso de color como único indicador.
 - Falta de contexto sobre el "por qué" y la "solución".
 ## Filosofía
 
@@ -57,7 +58,7 @@ a11y-lint scan --enable=no-color-only output.txt
 
 ### Insignias y conformidad
 
-Las puntuaciones y las insignias son **puramente informativas**. NO implican conformidad con WCAG ni certificación de accesibilidad. Esta herramienta verifica reglas de política que van más allá de los requisitos mínimos de WCAG.
+Las puntuaciones y las insignias son **solo informativas**. NO implican conformidad con WCAG ni certificación de accesibilidad. Esta herramienta verifica reglas de política que van más allá de los requisitos mínimos de WCAG.
 
 ## Instalación
 
@@ -151,35 +152,35 @@ a11y-lint schema
 ## Variables de entorno
 
 | Variable | Descripción |
-| ---------- | ------------- |
+|----------|-------------|
 | `NO_COLOR` | Desactiva la salida con color (cualquier valor). |
 | `FORCE_COLOR` | Fuerza la salida con color (cualquier valor, anula `NO_COLOR=false`). |
 
-Consulte [no-color.org](https://no-color.org/) para obtener la norma.
+Consulte [no-color.org](https://no-color.org/) para obtener el estándar.
 
 ## Reglas
 
 ### Reglas de WCAG
 
 | Regla | Código | WCAG | Descripción |
-| ------ | ------ | ------ | ------------- |
-| `no-color-only` | CLR001 | 1.4.1 | No transmitir información solo a través del color. |
+|------|------|------|-------------|
+| `no-color-only` | CLR001 | 1.4.1 | No transmita información solo a través del color. |
 
 ### Reglas de política
 
 | Regla | Código | Descripción |
-| ------ | ------ | ------------- |
+|------|------|-------------|
 | `line-length` | FMT001 | Las líneas deben tener 120 caracteres o menos. |
 | `no-all-caps` | LNG002 | Evite el texto en mayúsculas (difícil de leer). |
-| `plain-language` | LNG001 | Evitar la jerga técnica (EOF, STDIN, etc.). |
-| `emoji-moderation` | SCR001 | Limitar el uso de emojis (confunden a los lectores de pantalla). |
-| `punctuation` | LNG003 | Los mensajes de error deben terminar con signos de puntuación. |
-| `error-structure` | A11Y003 | Los errores deben explicar por qué ocurrieron y cómo solucionarlos. |
-| `no-ambiguous-pronouns` | LNG004 | Evitar comenzar con "esto", "eso", etc. |
+| `plain-language` | LNG001 | Evite la jerga técnica (EOF, STDIN, etc.). |
+| `emoji-moderation` | SCR001 | Limite el uso de emojis (confunde a los lectores de pantalla). |
+| `punctuation` | LNG003 | Los mensajes de error deben terminar con puntuación. |
+| `error-structure` | A11Y003 | Los errores deben explicar por qué y cómo solucionarlos. |
+| `no-ambiguous-pronouns` | LNG004 | Evite comenzar con "it", "this", etc. |
 
 ## Formato de los mensajes de error
 
-Todos los mensajes de error siguen la estructura Qué/Por qué/Solución:
+Todos los mensajes de error siguen la estructura ¿Qué/Por qué/Solución?:
 
 ```
 [ERROR] CODE: What happened
@@ -272,16 +273,20 @@ markdown = render_report_md(messages, title="My Report")
 ### Mejores prácticas
 
 1. **Priorizar los errores, no las calificaciones**: Utilizar códigos de salida, no calificaciones.
-2. **Habilitar reglas específicas**: Para el cumplimiento de WCAG, habilitar `no-color-only`.
-3. **Realizar un seguimiento de las líneas base**: Utilizar la salida JSON para detectar regresiones.
-4. **Considerar los distintivos como informativos**: No implican conformidad.
+2. **Activar reglas específicas**: Para el cumplimiento de WCAG, activar `no-color-only`.
+3. **Realizar un seguimiento de las líneas base**: Utilizar la salida en formato JSON para detectar regresiones.
+4. **Considerar los distintivos como información**: No implican conformidad.
+
+## Seguridad y alcance de los datos
+
+**Datos accedidos:** archivos de texto y JSON pasados como argumentos de la interfaz de línea de comandos (solo lectura), entrada de stdin, informes generados escritos en stdout o en la ruta especificada con `-o`. **Datos NO accedidos:** ningún archivo fuera de los argumentos especificados, ningún dato del navegador, ninguna credencial del sistema operativo. **No hay salida de red**: todo el análisis se realiza localmente. **No se recopilan ni se envían datos de telemetría**.
 
 ## Herramientas complementarias
 
-| Herramienta. | Descripción. |
-| ------ | ------------- |
-| [a11y-ci](https://pypi.org/project/a11y-ci/) | Control de integración continua para las puntuaciones de accesibilidad con detección de regresiones en la línea base. |
-| [a11y-assist](https://pypi.org/project/a11y-assist/) | Asistencia determinista para la accesibilidad en caso de fallos en la interfaz de línea de comandos. |
+| Herramienta | Descripción |
+|------|-------------|
+| [a11y-ci](https://pypi.org/project/a11y-ci/) | Control de calidad para las puntuaciones de accesibilidad con detección de regresiones basada en líneas base. |
+| [a11y-assist](https://pypi.org/project/a11y-assist/) | Asistencia determinista para errores en la interfaz de línea de comandos. |
 
 ## Desarrollo
 
@@ -304,4 +309,8 @@ ruff format .
 
 ## Licencia
 
-MIT.
+MIT
+
+---
+
+Creado por <a href="https://mcp-tool-shop.github.io/">MCP Tool Shop</a>
